@@ -4,7 +4,7 @@ import { Eye, FileText, Clock } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -105,29 +105,29 @@ export default async function ReviewQueuePage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-xl font-semibold">Antrian Tinjauan OCR</h1>
-        <p className="text-sm text-muted-foreground mt-0.5">
+      <div className="border-b border-gray-100 pb-4 mb-6">
+        <h1 className="text-xl font-semibold tracking-tight text-gray-900">Antrian Tinjauan OCR</h1>
+        <p className="text-sm text-muted-foreground mt-1">
           Dokumen yang menunggu tinjauan dan koreksi manual
         </p>
       </div>
 
       {/* Queue list */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base flex items-center gap-2">
-            <Clock className="h-4 w-4" />
+      <div className="rounded-xl ring-1 ring-gray-100/80 border-0 shadow-sm bg-white">
+        <div className="px-6 pt-5 pb-4 border-b border-gray-50">
+          <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+            <Clock className="h-4 w-4 text-brand-600" />
             Menunggu Tinjauan
             {items.length > 0 && (
               <Badge variant="secondary" className="ml-1">
                 {items.length}
               </Badge>
             )}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
+          </h2>
+        </div>
+        <div className="p-6">
           {items.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-12 text-center">
+            <div className="flex flex-col items-center justify-center py-10 text-center">
               <div className="h-12 w-12 rounded-full bg-emerald-50 flex items-center justify-center mb-3">
                 <Eye className="h-6 w-6 text-emerald-500" />
               </div>
@@ -146,7 +146,7 @@ export default async function ReviewQueuePage() {
               {items.map((doc) => (
                 <div
                   key={doc.id}
-                  className="flex items-center gap-3 rounded-lg border bg-background p-3 hover:bg-muted/30 transition-colors"
+                  className="flex items-center gap-3 rounded-lg ring-1 ring-gray-100/60 bg-white p-3 hover:bg-gray-50/70 transition-colors"
                 >
                   {/* Icon */}
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-50 flex-shrink-0">
@@ -188,8 +188,8 @@ export default async function ReviewQueuePage() {
               ))}
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }

@@ -221,19 +221,21 @@ export default function ChildrenPage() {
   return (
     <div className="space-y-4 p-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-semibold">Data Anak</h1>
-          <p className="text-sm text-muted-foreground mt-0.5">
-            {children.length} anak terdaftar di posyandu ini
-          </p>
+      <div className="border-b border-gray-100 pb-4 mb-6">
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          <div>
+            <h1 className="text-xl font-semibold tracking-tight text-gray-900">Data Anak</h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              <span className="text-brand-600 font-semibold">{children.length}</span> anak terdaftar di posyandu ini
+            </p>
+          </div>
+          <Button asChild>
+            <Link href="/children/new">
+              <Plus className="h-4 w-4 mr-2" />
+              Tambah Anak
+            </Link>
+          </Button>
         </div>
-        <Button asChild>
-          <Link href="/children/new">
-            <Plus className="h-4 w-4 mr-2" />
-            Tambah Anak
-          </Link>
-        </Button>
       </div>
 
       {/* Error */}
@@ -270,7 +272,9 @@ export default function ChildrenPage() {
           />
         )
       ) : (
-        <DataTable columns={columns} data={filtered} pageSize={25} />
+        <div className="rounded-xl ring-1 ring-gray-100/80 border-0 shadow-sm bg-white overflow-hidden">
+          <DataTable columns={columns} data={filtered} pageSize={25} />
+        </div>
       )}
     </div>
   )

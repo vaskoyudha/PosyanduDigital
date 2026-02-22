@@ -2,7 +2,6 @@
 
 import { useState, useCallback, useEffect } from 'react'
 import { Download, FileSpreadsheet, FileText, Eye, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
@@ -120,8 +119,8 @@ export function ExportPageClient({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Ekspor Data</h1>
+      <div className="border-b border-gray-100 pb-4 mb-2">
+        <h1 className="text-xl font-semibold tracking-tight text-gray-900">Ekspor Data</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Unduh data e-PPGBM dalam format Excel atau laporan bulanan dalam format PDF.
         </p>
@@ -132,7 +131,7 @@ export function ExportPageClient({
         <div
           className={`flex items-center gap-2 rounded-lg border px-4 py-3 text-sm ${
             toast.type === 'success'
-              ? 'border-green-200 bg-green-50 text-green-800'
+              ? 'border-brand-200 bg-brand-50 text-brand-800'
               : 'border-red-200 bg-red-50 text-red-800'
           }`}
         >
@@ -146,16 +145,16 @@ export function ExportPageClient({
       )}
 
       {/* Export Options */}
-      <Card>
-        <CardHeader className="pb-4">
-          <CardTitle className="text-base font-semibold">Pengaturan Ekspor</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
+      <div className="ring-1 ring-gray-100/80 border-0 shadow-sm bg-white rounded-xl">
+        <div className="px-6 pt-5 pb-4 border-b border-gray-50">
+          <h2 className="text-sm font-semibold text-gray-900">Pengaturan Ekspor</h2>
+        </div>
+        <div className="p-6 space-y-4">
           {/* Format selector */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {/* Format */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Format</label>
+              <label className="text-sm font-medium text-gray-700">Format</label>
               <Select value={format} onValueChange={(val) => setFormat(val as ExportFormat)}>
                 <SelectTrigger>
                   <SelectValue />
@@ -182,7 +181,7 @@ export function ExportPageClient({
             {/* Puskesmas selector (if dinas/admin with multiple puskesmas) */}
             {canShowPuskesmasSelector && (
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Puskesmas</label>
+                <label className="text-sm font-medium text-gray-700">Puskesmas</label>
                 <Select
                   value={selectedPuskesmasId}
                   onValueChange={(val) => {
@@ -208,7 +207,7 @@ export function ExportPageClient({
             {/* Posyandu selector */}
             {format === 'excel' && (
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Posyandu</label>
+                <label className="text-sm font-medium text-gray-700">Posyandu</label>
                 <Select
                   value={selectedPosyanduId}
                   onValueChange={(val) => {
@@ -232,7 +231,7 @@ export function ExportPageClient({
 
             {/* Month selector */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Bulan</label>
+              <label className="text-sm font-medium text-gray-700">Bulan</label>
               <Select value={selectedBulan} onValueChange={(val) => {
                 setSelectedBulan(val)
                 setShowPreview(false)
@@ -282,8 +281,8 @@ export function ExportPageClient({
               </Badge>
             )}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Preview Section */}
       {showPreview && selectedPosyanduId && (

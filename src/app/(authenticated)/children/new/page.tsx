@@ -22,19 +22,21 @@ export default function NewChildPage() {
       </div>
 
       {/* Page title */}
-      <div>
-        <h1 className="text-xl font-semibold">Daftarkan Anak Baru</h1>
-        <p className="text-sm text-muted-foreground mt-0.5">
+      <div className="border-b border-gray-100 pb-4">
+        <h1 className="text-xl font-semibold tracking-tight text-gray-900">Daftarkan Anak Baru</h1>
+        <p className="text-sm text-muted-foreground mt-1">
           Isi data anak dan persetujuan orang tua/wali sesuai UU PDP.
         </p>
       </div>
 
       {/* Form */}
-      <ChildForm
-        onSuccess={(childId) => {
-          router.push(`/children/${childId}`)
-        }}
-      />
+      <div className="rounded-xl ring-1 ring-gray-100/80 border-0 shadow-sm bg-white p-6">
+        <ChildForm
+          onSuccess={(childId) => {
+            router.push(`/children/${childId}`)
+          }}
+        />
+      </div>
     </div>
   )
 }

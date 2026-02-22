@@ -246,7 +246,7 @@ export default function ChildProfilePage() {
       </div>
 
       {/* ── Child info card ── */}
-      <div className="rounded-xl border bg-card p-5 shadow-sm">
+      <div className="rounded-xl ring-1 ring-gray-100/80 border-0 shadow-sm bg-white p-5">
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div>
             <h1 className="text-xl font-semibold text-foreground">{child.nama}</h1>
@@ -368,7 +368,7 @@ export default function ChildProfilePage() {
       </div>
 
       {/* ── Growth chart ── */}
-      <div className="rounded-xl border bg-card p-5 shadow-sm">
+      <div className="rounded-xl ring-1 ring-gray-100/80 border-0 shadow-sm bg-white p-5">
         <div className="flex items-center justify-between gap-3 flex-wrap mb-4">
           <h2 className="text-base font-semibold">Grafik Pertumbuhan (WHO)</h2>
           <Tabs
@@ -397,7 +397,7 @@ export default function ChildProfilePage() {
       </div>
 
       {/* ── Measurement history ── */}
-      <div className="rounded-xl border bg-card p-5 shadow-sm">
+      <div className="rounded-xl ring-1 ring-gray-100/80 border-0 shadow-sm bg-white p-5">
         <div className="flex items-center justify-between gap-3 flex-wrap mb-4">
           <h2 className="text-base font-semibold">Riwayat Pengukuran</h2>
           <Button size="sm" variant="outline" asChild>

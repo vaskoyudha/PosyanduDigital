@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Upload, FileText, Eye, Clock } from 'lucide-react'
+import { FileText, Eye, Clock } from 'lucide-react'
 import { useUser } from '@/lib/hooks/use-user'
 import { createClient } from '@/lib/supabase/client'
 import { UploadDropzone } from '@/components/ocr/upload-dropzone'
@@ -11,7 +11,6 @@ import { EmptyState } from '@/components/shared/empty-state'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import type { OcrStatus } from '@/types/database'
 import { OCR_STATUS_MESSAGES, OCR_STATUS_PROGRESS } from '@/types/ocr'
@@ -164,9 +163,9 @@ export default function UploadPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-xl font-semibold">Unggah Dokumen OCR</h1>
-        <p className="text-sm text-muted-foreground mt-0.5">
+      <div className="border-b border-gray-100 pb-4 mb-6">
+        <h1 className="text-xl font-semibold tracking-tight text-gray-900">Unggah Dokumen OCR</h1>
+        <p className="text-sm text-muted-foreground mt-1">
           Unggah foto register posyandu untuk diproses secara otomatis
         </p>
       </div>
@@ -178,14 +177,14 @@ export default function UploadPage() {
       />
 
       {/* Recent uploads */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base flex items-center gap-2">
-            <Clock className="h-4 w-4" />
+      <div className="rounded-xl ring-1 ring-gray-100/80 border-0 shadow-sm bg-white">
+        <div className="px-6 pt-5 pb-4 border-b border-gray-50">
+          <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+            <Clock className="h-4 w-4 text-brand-600" />
             Unggahan Terbaru
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
+          </h2>
+        </div>
+        <div className="p-6">
           {isLoading ? (
             <LoadingSkeleton rows={4} />
           ) : error ? (
@@ -206,10 +205,10 @@ export default function UploadPage() {
                 return (
                   <div
                     key={doc.id}
-                    className="flex items-center gap-3 rounded-lg border bg-background p-3 transition-colors hover:bg-muted/30"
+                    className="flex items-center gap-3 rounded-lg ring-1 ring-gray-100/60 bg-white p-3 transition-colors hover:bg-gray-50/70"
                   >
                     {/* Icon */}
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted flex-shrink-0">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-50 flex-shrink-0">
                       <FileText className="h-5 w-5 text-muted-foreground" />
                     </div>
 
@@ -262,8 +261,8 @@ export default function UploadPage() {
               })}
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }

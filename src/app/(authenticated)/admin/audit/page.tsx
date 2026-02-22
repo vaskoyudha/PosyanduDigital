@@ -47,9 +47,9 @@ export default async function AuditLogPage() {
   return (
     <div className="space-y-6 p-4 md:p-6">
       {/* Header */}
-      <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-50">
-          <Shield className="h-5 w-5 text-green-600" />
+      <div className="flex items-center gap-3 border-b border-gray-100 pb-4 mb-6">
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50">
+          <Shield className="h-5 w-5 text-brand-600" />
         </div>
         <div>
           <h1 className="text-xl font-bold text-gray-900">Log Akses</h1>
