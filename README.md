@@ -8,6 +8,13 @@
 [![Tests](https://img.shields.io/badge/Tests-170%20passing-brightgreen)](#testing)
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
+---
+
+## Pratinjau
+
+| Halaman Login | Dasbor Analitik |
+|:---:|:---:|
+| ![Halaman Login](public/preview-login.png) | ![Dasbor](public/preview-dashboard.png) |
 
 ---
 
