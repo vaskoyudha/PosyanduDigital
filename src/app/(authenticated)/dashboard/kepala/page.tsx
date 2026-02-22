@@ -76,9 +76,10 @@ export default async function DashboardKepalaPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Dashboard Kepala Puskesmas</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
+      {/* Page header */}
+      <div className="flex flex-col gap-1 pb-2 border-b border-gray-100">
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900">Dashboard Kepala Puskesmas</h1>
+        <p className="text-sm text-muted-foreground">
           {puskesmasNama} · {bulan}
         </p>
       </div>
@@ -130,9 +131,9 @@ export default async function DashboardKepalaPage() {
       </div>
 
       {/* SPM Progress */}
-      <Card>
+      <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
         <CardHeader className="pb-3">
-          <CardTitle className="text-base font-semibold">Capaian SPM</CardTitle>
+          <CardTitle className="text-base font-semibold text-gray-900">Capaian SPM</CardTitle>
         </CardHeader>
         <CardContent>
           <SpmProgress ds_pct={agg_ds_pct} />
@@ -141,9 +142,9 @@ export default async function DashboardKepalaPage() {
 
       {/* Trend Chart */}
       {trend.length > 0 && (
-        <Card>
+        <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
           <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">Tren SKDN 6 Bulan</CardTitle>
+            <CardTitle className="text-base font-semibold text-gray-900">Tren SKDN 6 Bulan</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
             <SKDNTrendChart data={trend} />
@@ -153,9 +154,9 @@ export default async function DashboardKepalaPage() {
 
       {/* Posyandu Ranking */}
       {puskesmasId && (
-        <Card>
+        <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base font-semibold">Ranking Posyandu (D/S%)</CardTitle>
+            <CardTitle className="text-base font-semibold text-gray-900">Ranking Posyandu (D/S%)</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
             <PosyanduTable puskesmasId={puskesmasId} bulan={bulan} />
@@ -164,9 +165,9 @@ export default async function DashboardKepalaPage() {
       )}
 
       {/* Alert Summary */}
-      <Card>
+      <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
         <CardHeader className="pb-3">
-          <CardTitle className="text-base font-semibold">
+          <CardTitle className="text-base font-semibold text-gray-900">
             Ringkasan Peringatan — {alerts.length} anak berisiko
           </CardTitle>
         </CardHeader>

@@ -257,8 +257,8 @@ export function UploadDropzone({
           className={cn(
             'relative flex min-h-[180px] cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed transition-colors',
             isDragOver
-              ? 'border-primary bg-primary/5'
-              : 'border-muted-foreground/25 hover:border-primary/50 hover:bg-muted/30',
+              ? 'border-brand-400 bg-brand-50'
+              : 'border-gray-300 hover:border-brand-300 hover:bg-gray-50/60',
             disabled && 'pointer-events-none opacity-50'
           )}
           onClick={() => fileInputRef.current?.click()}
@@ -271,9 +271,11 @@ export function UploadDropzone({
             }
           }}
         >
-          <Upload className="h-10 w-10 text-muted-foreground/60 mb-3" />
+          <div className="bg-brand-50 text-brand-500 rounded-xl p-3 mb-3">
+            <Upload className="h-7 w-7" />
+          </div>
           <p className="text-sm font-medium text-muted-foreground">
-            Seret & lepas file di sini
+            Seret &amp; lepas file di sini
           </p>
           <p className="text-xs text-muted-foreground/60 mt-1">
             JPEG, PNG, HEIC, WebP, PDF — maks {maxFiles} file, 10MB/file
@@ -336,7 +338,7 @@ export function UploadDropzone({
               {queue.map((q) => (
                 <div
                   key={q.id}
-                  className="flex items-center gap-3 rounded-lg border bg-background p-2"
+                  className="flex items-center gap-3 rounded-lg bg-white ring-1 ring-gray-100 p-2"
                 >
                   {/* Thumbnail */}
                   {q.preview ? (

@@ -63,20 +63,25 @@ export default async function DashboardBidanPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-start justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Dashboard Bidan</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {posyanduNama} · {bulan}
-          </p>
+      {/* Page header */}
+      <div className="flex flex-col gap-1 pb-2 border-b border-gray-100">
+        <div className="flex items-start justify-between">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight text-gray-900">
+              Dashboard Bidan
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              {posyanduNama} · {bulan}
+            </p>
+          </div>
+          <Link
+            href="/children/new"
+            className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-xs font-medium text-primary-foreground hover:bg-primary/90"
+          >
+            <ClipboardPlus className="h-3.5 w-3.5" />
+            Tambah Pengukuran
+          </Link>
         </div>
-        <Link
-          href="/children/new"
-          className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-xs font-medium text-primary-foreground hover:bg-primary/90"
-        >
-          <ClipboardPlus className="h-3.5 w-3.5" />
-          Tambah Pengukuran
-        </Link>
       </div>
 
       {!posyanduId && (
@@ -115,10 +120,10 @@ export default async function DashboardBidanPage() {
       )}
 
       {/* Alert Inbox */}
-      <Card>
+      <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between flex-wrap gap-2">
-            <CardTitle className="text-base font-semibold">Anak Berisiko</CardTitle>
+            <CardTitle className="text-base font-semibold text-gray-900">Anak Berisiko</CardTitle>
             <div className="flex gap-2">
               {bgmCount > 0 && (
                 <Badge className="bg-rose-100 text-rose-800 border border-rose-200">
@@ -140,9 +145,9 @@ export default async function DashboardBidanPage() {
 
       {/* Quick Posyandu Summary */}
       {skdn && (
-        <Card>
+        <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base font-semibold">Ringkasan Posyandu</CardTitle>
+            <CardTitle className="text-base font-semibold text-gray-900">Ringkasan Posyandu</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-4 gap-4 text-center">

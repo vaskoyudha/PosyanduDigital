@@ -91,20 +91,20 @@ export function MobileNav() {
             href={tab.href}
             className={cn(
               'flex flex-1 flex-col items-center justify-center gap-1 text-[10px] font-medium transition-colors',
-              isActive ? 'text-green-600' : 'text-gray-500 hover:text-gray-700'
+              isActive ? 'text-brand-600' : 'text-gray-500 hover:text-gray-700'
             )}
             aria-current={isActive ? 'page' : undefined}
           >
             <tab.icon
               className={cn(
                 'h-5 w-5 transition-colors',
-                isActive ? 'text-green-600' : 'text-gray-400'
+                isActive ? 'text-brand-600' : 'text-gray-400'
               )}
               strokeWidth={isActive ? 2.25 : 1.75}
             />
             <span>{tab.label}</span>
             {isActive && (
-              <span className="absolute bottom-0 h-0.5 w-8 rounded-full bg-green-500" />
+              <span className="absolute bottom-0 h-0.5 w-8 rounded-full bg-brand-600" />
             )}
           </Link>
         )

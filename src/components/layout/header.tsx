@@ -48,12 +48,12 @@ export function Header() {
   }
 
   return (
-    <header className="flex h-14 items-center justify-between border-b border-gray-100 bg-white px-4 shrink-0">
+    <header className="flex h-14 items-center justify-between bg-surface-raised shadow-[0_1px_0_oklch(0_0_0/0.06)] px-4 shrink-0">
       {/* Left: Mobile hamburger */}
       <div className="flex items-center gap-2">
         <MobileSidebarTrigger />
         {/* Desktop: breadcrumb placeholder — pages can slot in via portal if needed */}
-        <span className="hidden md:block text-sm text-gray-500 font-medium">
+        <span className="hidden md:block text-sm font-medium text-gray-600 tracking-tight">
           PosyanduDigital
         </span>
       </div>
@@ -67,10 +67,7 @@ export function Header() {
           >
             {/* Avatar */}
             <div
-              className={cn(
-                'flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold border shrink-0',
-                chipClass
-              )}
+              className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold shrink-0 bg-gradient-to-br from-brand-400 to-brand-600 text-white"
             >
               {initials}
             </div>
@@ -82,7 +79,7 @@ export function Header() {
               </span>
               <span
                 className={cn(
-                  'inline-flex items-center rounded-full border px-1.5 py-0 text-[10px] font-semibold tracking-wide uppercase leading-4',
+                  'inline-flex items-center rounded-full border px-1.5 py-0 text-[10px] font-medium tracking-wide uppercase leading-4',
                   chipClass
                 )}
               >
@@ -94,7 +91,7 @@ export function Header() {
           </Button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent align="end" className="w-52">
+        <DropdownMenuContent align="end" className="w-52 shadow-lg shadow-black/5">
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-semibold text-gray-900 leading-none">
@@ -102,7 +99,7 @@ export function Header() {
               </p>
               <p
                 className={cn(
-                  'inline-flex w-fit items-center rounded-full border px-1.5 py-0.5 text-[10px] font-semibold tracking-wide uppercase mt-1',
+                  'inline-flex w-fit items-center rounded-full border px-1.5 py-0.5 text-[10px] font-medium tracking-wide uppercase mt-1',
                   chipClass
                 )}
               >

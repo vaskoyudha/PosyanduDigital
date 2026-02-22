@@ -151,9 +151,10 @@ export default async function DashboardDinasPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Dashboard Dinas Kesehatan</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
+      {/* Page header */}
+      <div className="flex flex-col gap-1 pb-2 border-b border-gray-100">
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900">Dashboard Dinas Kesehatan</h1>
+        <p className="text-sm text-muted-foreground">
           {districtId ? 'Wilayah Kabupaten/Kota' : 'Semua Wilayah'} · {bulan}
         </p>
       </div>
@@ -204,9 +205,9 @@ export default async function DashboardDinasPage() {
       </div>
 
       {/* SPM Progress — district-wide */}
-      <Card>
+      <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
         <CardHeader className="pb-3">
-          <CardTitle className="text-base font-semibold">Capaian SPM Kabupaten/Kota</CardTitle>
+          <CardTitle className="text-base font-semibold text-gray-900">Capaian SPM Kabupaten/Kota</CardTitle>
         </CardHeader>
         <CardContent>
           <SpmProgress ds_pct={grand_ds_pct} />
@@ -215,10 +216,10 @@ export default async function DashboardDinasPage() {
 
       {/* Puskesmas Comparison Table */}
       {puskesmasAggregates.length > 0 && (
-        <Card>
+        <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-base font-semibold">
+              <CardTitle className="text-base font-semibold text-gray-900">
                 Perbandingan Puskesmas ({puskesmasList.length})
               </CardTitle>
               <span className="text-xs text-muted-foreground">Disortir berdasarkan D/S%</span>
@@ -284,7 +285,7 @@ export default async function DashboardDinasPage() {
 
       {/* Data Completeness Summary Cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <Card>
+        <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
               <div className="rounded-lg bg-blue-100 p-2">
@@ -297,7 +298,7 @@ export default async function DashboardDinasPage() {
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
               <div className="rounded-lg bg-emerald-100 p-2">
@@ -310,7 +311,7 @@ export default async function DashboardDinasPage() {
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
               <div className={cn(
@@ -337,9 +338,9 @@ export default async function DashboardDinasPage() {
 
       {/* District Prevalence Bar Chart (by puskesmas) */}
       {prevalenceByPuskesmas.length > 0 && (
-        <Card>
+        <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
           <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">Prevalensi Gizi per Puskesmas</CardTitle>
+            <CardTitle className="text-base font-semibold text-gray-900">Prevalensi Gizi per Puskesmas</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
             <PrevalenceBarChart data={prevalenceByPuskesmas} />
@@ -348,10 +349,10 @@ export default async function DashboardDinasPage() {
       )}
 
       {/* Alert Summary across district */}
-      <Card>
+      <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between flex-wrap gap-2">
-            <CardTitle className="text-base font-semibold">
+            <CardTitle className="text-base font-semibold text-gray-900">
               Anak Berisiko — {allAlerts.length} kasus prioritas
             </CardTitle>
             {alertPuskesmasList.length < puskesmasList.length && (

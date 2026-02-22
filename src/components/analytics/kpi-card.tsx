@@ -19,18 +19,18 @@ export interface KpiCardProps {
   className?: string
 }
 
-const borderColors: Record<KpiColor, string> = {
-  green: 'border-l-emerald-500',
-  yellow: 'border-l-amber-400',
-  red: 'border-l-rose-500',
-  neutral: 'border-l-slate-300',
+const iconBg: Record<KpiColor, string> = {
+  green: 'bg-emerald-50 text-emerald-600',
+  yellow: 'bg-amber-50 text-amber-600',
+  red: 'bg-rose-50 text-rose-600',
+  neutral: 'bg-slate-50 text-slate-500',
 }
 
-const valueBg: Record<KpiColor, string> = {
-  green: 'text-emerald-700',
-  yellow: 'text-amber-700',
-  red: 'text-rose-700',
-  neutral: 'text-slate-700',
+const valueFg: Record<KpiColor, string> = {
+  green: 'text-gray-900',
+  yellow: 'text-gray-900',
+  red: 'text-gray-900',
+  neutral: 'text-gray-900',
 }
 
 export function KpiCard({
@@ -49,48 +49,43 @@ export function KpiCard({
   const TrendIcon = trendPositive ? TrendingUp : trendNegative ? TrendingDown : Minus
 
   const card = (
-    <Card
-      className={cn(
-        'border-l-4 shadow-sm hover:shadow-md transition-shadow',
-        borderColors[color],
-        className
-      )}
-    >
+    <Card className={cn('shadow-sm hover:shadow-md transition-all duration-200 border-0 bg-white ring-1 ring-gray-100/80', className)}>
       <CardContent className="p-5">
-        <div className="flex items-start justify-between gap-2">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground leading-tight">
-            {title}
-          </p>
-          {icon && (
-            <span className="text-muted-foreground/60 shrink-0">{icon}</span>
-          )}
-        </div>
-
-        <div className="mt-3 flex items-end gap-1">
-          <span className={cn('text-3xl font-bold tabular-nums leading-none', valueBg[color])}>
-            {value}
-          </span>
-          {unit && (
-            <span className="mb-0.5 text-sm font-medium text-muted-foreground">{unit}</span>
-          )}
-        </div>
-
-        {trend !== undefined && (
-          <div
-            className={cn(
-              'mt-2 flex items-center gap-1 text-xs font-medium',
-              trendPositive && 'text-emerald-600',
-              trendNegative && 'text-rose-500',
-              !trendPositive && !trendNegative && 'text-muted-foreground'
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground leading-tight truncate">
+              {title}
+            </p>
+            <div className="mt-2.5 flex items-baseline gap-1.5">
+              <span className={cn('text-3xl font-bold tabular-nums leading-none tracking-tight', valueFg[color])}>
+                {value}
+              </span>
+              {unit && (
+                <span className="text-sm font-medium text-muted-foreground">{unit}</span>
+              )}
+            </div>
+            {trend !== undefined && (
+              <div className={cn(
+                'mt-2 flex items-center gap-1 text-xs font-medium',
+                trendPositive && 'text-emerald-600',
+                trendNegative && 'text-rose-500',
+                !trendPositive && !trendNegative && 'text-muted-foreground'
+              )}>
+                <TrendIcon className="h-3 w-3" />
+                <span>{trendPositive ? '+' : ''}{trend.toFixed(1)}%</span>
+                {trendLabel && <span className="text-muted-foreground font-normal">{trendLabel}</span>}
+              </div>
             )}
-          >
-            <TrendIcon className="h-3 w-3" />
-            <span>
-              {trendPositive ? '+' : ''}{trend.toFixed(1)}%
-            </span>
-            {trendLabel && <span className="text-muted-foreground font-normal">{trendLabel}</span>}
           </div>
-        )}
+          {icon && (
+            <div className={cn(
+              'flex h-10 w-10 items-center justify-center rounded-xl shrink-0',
+              iconBg[color]
+            )}>
+              {icon}
+            </div>
+          )}
+        </div>
       </CardContent>
     </Card>
   )

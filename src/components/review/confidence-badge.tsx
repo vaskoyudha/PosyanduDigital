@@ -26,10 +26,10 @@ function getConfidenceLevel(confidence: number | null): 'high' | 'medium' | 'low
 }
 
 const LEVEL_STYLES = {
-  high: 'bg-emerald-50 text-emerald-700 border-emerald-200 ring-emerald-100',
-  medium: 'bg-amber-50 text-amber-700 border-amber-200 ring-amber-100',
-  low: 'bg-red-50 text-red-700 border-red-200 ring-red-100',
-  unknown: 'bg-gray-50 text-gray-500 border-gray-200 ring-gray-100',
+  high:    { badge: 'bg-emerald-50 text-emerald-700 border border-emerald-200 font-medium', dot: 'bg-emerald-500' },
+  medium:  { badge: 'bg-amber-50 text-amber-700 border border-amber-200 font-medium',       dot: 'bg-amber-400'  },
+  low:     { badge: 'bg-rose-50 text-rose-700 border border-rose-200 font-medium',           dot: 'bg-rose-500'   },
+  unknown: { badge: 'bg-gray-50 text-gray-500 border border-gray-200 font-medium',           dot: 'bg-gray-400'   },
 } as const
 
 const LEVEL_LABELS = {
@@ -55,13 +55,13 @@ export function ConfidenceBadge({ confidence, className }: ConfidenceBadgeProps)
         <TooltipTrigger asChild>
           <span
             className={cn(
-              'inline-flex items-center justify-center rounded border px-1.5 py-0.5',
-              'text-[10px] font-semibold tabular-nums leading-none',
+              'inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full',
               'cursor-default select-none transition-colors',
-              LEVEL_STYLES[level],
+              LEVEL_STYLES[level].badge,
               className
             )}
           >
+            <span className={cn('h-1.5 w-1.5 rounded-full shrink-0', LEVEL_STYLES[level].dot)} />
             {pctText}
           </span>
         </TooltipTrigger>

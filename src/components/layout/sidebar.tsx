@@ -82,6 +82,7 @@ const NAV_ITEMS_BY_ROLE: Record<string, NavItem[]> = {
   ],
 }
 
+// Role badge colors used in mobile sheet (light bg) — kept for reference but sidebar uses unified white treatment
 const ROLE_BADGE_COLORS: Record<string, string> = {
   [ROLES.KADER]: 'bg-blue-100 text-blue-700 border-blue-200',
   [ROLES.BIDAN]: 'bg-purple-100 text-purple-700 border-purple-200',
@@ -102,15 +103,15 @@ interface SidebarContentProps {
   collapsed: boolean
   onToggle?: () => void
   onNavigate?: () => void
+  isDark?: boolean
 }
 
-function SidebarContent({ collapsed, onToggle, onNavigate }: Readonly<SidebarContentProps>) {
+function SidebarContent({ collapsed, onToggle, onNavigate, isDark = false }: Readonly<SidebarContentProps>) {
   const pathname = usePathname()
   const { profile, role } = useUser()
   const navItems = getNavItems(role)
 
   const roleLabel = role ? (ROLE_LABELS[role] ?? role) : ''
-  const roleBadgeClass = role ? (ROLE_BADGE_COLORS[role] ?? ROLE_BADGE_COLORS[ROLES.ADMIN]) : ''
 
   return (
     <TooltipProvider delayDuration={0}>
@@ -118,21 +119,31 @@ function SidebarContent({ collapsed, onToggle, onNavigate }: Readonly<SidebarCon
         {/* Logo area */}
         <div
           className={cn(
-            'flex h-14 items-center border-b border-gray-100 px-4 shrink-0',
+            'flex h-14 items-center px-4 shrink-0',
+            isDark ? 'border-b border-white/10' : 'border-b border-gray-100',
             collapsed ? 'justify-center' : 'justify-between'
           )}
         >
           {!collapsed && (
             <Link href="/dashboard" className="flex items-center gap-2.5 group">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-green-600 shadow-sm group-hover:bg-green-700 transition-colors">
+              <div className={cn(
+                'flex h-7 w-7 items-center justify-center rounded-lg shadow-sm transition-colors',
+                isDark ? 'bg-white/15 hover:bg-white/25' : 'bg-green-600 hover:bg-green-700'
+              )}>
                 <Leaf className="h-4 w-4 text-white" strokeWidth={1.75} />
               </div>
-              <span className="font-bold text-gray-900 text-sm tracking-tight">PosyanduDigital</span>
+              <span className={cn(
+                'font-bold text-sm tracking-tight',
+                isDark ? 'text-white' : 'text-gray-900'
+              )}>PosyanduDigital</span>
             </Link>
           )}
           {collapsed && (
             <Link href="/dashboard">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-green-600 shadow-sm hover:bg-green-700 transition-colors">
+              <div className={cn(
+                'flex h-7 w-7 items-center justify-center rounded-lg shadow-sm transition-colors',
+                isDark ? 'bg-white/15 hover:bg-white/25' : 'bg-green-600 hover:bg-green-700'
+              )}>
                 <Leaf className="h-4 w-4 text-white" strokeWidth={1.75} />
               </div>
             </Link>
@@ -140,7 +151,12 @@ function SidebarContent({ collapsed, onToggle, onNavigate }: Readonly<SidebarCon
           {onToggle && (
             <button
               onClick={onToggle}
-              className="flex h-7 w-7 items-center justify-center rounded-md text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+              className={cn(
+                'flex h-7 w-7 items-center justify-center rounded-md transition-colors',
+                isDark
+                  ? 'text-white/50 hover:bg-white/10 hover:text-white'
+                  : 'text-gray-400 hover:bg-gray-100 hover:text-gray-600'
+              )}
               aria-label={collapsed ? 'Perluas sidebar' : 'Perkecil sidebar'}
             >
               {collapsed ? (
@@ -168,9 +184,13 @@ function SidebarContent({ collapsed, onToggle, onNavigate }: Readonly<SidebarCon
             const linkClass = cn(
               'flex items-center rounded-lg text-sm font-medium transition-all duration-150',
               collapsed ? 'justify-center h-10 w-10 mx-auto' : 'gap-3 px-3 py-2.5 w-full',
-              isActive
-                ? 'bg-green-50 text-green-700'
-                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+              isDark
+                ? isActive
+                  ? 'bg-white/15 text-white'
+                  : 'text-white/60 hover:bg-white/10 hover:text-white'
+                : isActive
+                  ? 'bg-green-50 text-green-700'
+                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
             )
 
             if (collapsed) {
@@ -179,7 +199,12 @@ function SidebarContent({ collapsed, onToggle, onNavigate }: Readonly<SidebarCon
                   <TooltipTrigger asChild>
                     <Link href={item.href} className={linkClass} onClick={onNavigate}>
                       <item.icon
-                        className={cn('h-5 w-5 shrink-0', isActive ? 'text-green-600' : 'text-gray-500')}
+                        className={cn(
+                          'h-5 w-5 shrink-0',
+                          isDark
+                            ? isActive ? 'text-white' : 'text-white/50'
+                            : isActive ? 'text-green-600' : 'text-gray-500'
+                        )}
                         strokeWidth={isActive ? 2 : 1.75}
                       />
                     </Link>
@@ -194,12 +219,20 @@ function SidebarContent({ collapsed, onToggle, onNavigate }: Readonly<SidebarCon
             return (
               <Link key={item.href} href={item.href} className={linkClass} onClick={onNavigate}>
                 <item.icon
-                  className={cn('h-5 w-5 shrink-0', isActive ? 'text-green-600' : 'text-gray-400')}
+                  className={cn(
+                    'h-5 w-5 shrink-0',
+                    isDark
+                      ? isActive ? 'text-white' : 'text-white/50'
+                      : isActive ? 'text-green-600' : 'text-gray-400'
+                  )}
                   strokeWidth={isActive ? 2 : 1.75}
                 />
                 {item.label}
                 {isActive && (
-                  <span className="ml-auto h-1.5 w-1.5 rounded-full bg-green-500" />
+                  <span className={cn(
+                    'ml-auto h-1.5 w-1.5 rounded-full',
+                    isDark ? 'bg-white/80' : 'bg-green-500'
+                  )} />
                 )}
               </Link>
             )
@@ -209,7 +242,8 @@ function SidebarContent({ collapsed, onToggle, onNavigate }: Readonly<SidebarCon
         {/* Footer — user role badge */}
         <div
           className={cn(
-            'shrink-0 border-t border-gray-100 p-3',
+            'shrink-0 p-3',
+            isDark ? 'border-t border-white/10' : 'border-t border-gray-100',
             collapsed ? 'flex justify-center' : ''
           )}
         >
@@ -218,8 +252,10 @@ function SidebarContent({ collapsed, onToggle, onNavigate }: Readonly<SidebarCon
               <TooltipTrigger>
                 <div
                   className={cn(
-                    'flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold border',
-                    roleBadgeClass
+                    'flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold border shrink-0',
+                    isDark
+                      ? 'bg-white/20 text-white border-white/30'
+                      : 'bg-gray-100 text-gray-700 border-gray-200'
                   )}
                 >
                   {profile?.nama?.charAt(0)?.toUpperCase() ?? '?'}
@@ -235,21 +271,26 @@ function SidebarContent({ collapsed, onToggle, onNavigate }: Readonly<SidebarCon
               <div
                 className={cn(
                   'flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold border shrink-0',
-                  roleBadgeClass
+                  isDark
+                    ? 'bg-white/20 text-white border-white/30'
+                    : 'bg-gray-100 text-gray-700 border-gray-200'
                 )}
               >
                 {profile?.nama?.charAt(0)?.toUpperCase() ?? '?'}
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-gray-900 truncate">
+                <p className={cn(
+                  'text-sm font-medium truncate',
+                  isDark ? 'text-white' : 'text-gray-900'
+                )}>
                   {profile?.nama ?? 'Pengguna'}
                 </p>
-                <p
-                  className={cn(
-                    'inline-flex items-center rounded-full border px-1.5 py-0.5 text-[10px] font-semibold tracking-wide uppercase mt-0.5',
-                    roleBadgeClass
-                  )}
-                >
+                <p className={cn(
+                  'inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-medium tracking-wide uppercase mt-0.5',
+                  isDark
+                    ? 'bg-white/15 text-white/80'
+                    : 'bg-gray-100 text-gray-600'
+                )}>
                   {roleLabel}
                 </p>
               </div>
@@ -284,6 +325,7 @@ export function MobileSidebarTrigger() {
           </SheetHeader>
           <SidebarContent
             collapsed={false}
+            isDark={false}
             onNavigate={() => setOpen(false)}
           />
         </SheetContent>
@@ -312,11 +354,13 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        'hidden md:flex flex-col border-r border-gray-100 bg-white shrink-0 transition-all duration-300 ease-in-out',
+        'hidden md:flex flex-col shrink-0 transition-all duration-300 ease-in-out',
+        'bg-gradient-to-b from-[--sidebar-bg-from] to-[--sidebar-bg-to]',
+        'shadow-[4px_0_24px_oklch(0_0_0/0.15)]',
         collapsed ? 'w-16' : 'w-60'
       )}
     >
-      <SidebarContent collapsed={collapsed} onToggle={handleToggle} />
+      <SidebarContent collapsed={collapsed} onToggle={handleToggle} isDark={true} />
     </aside>
   )
 }

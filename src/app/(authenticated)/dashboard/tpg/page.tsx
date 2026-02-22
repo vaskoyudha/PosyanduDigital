@@ -74,20 +74,23 @@ export default async function DashboardTpgPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-start justify-between flex-wrap gap-3">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Dashboard TPG</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {puskesmasNama} · {bulan}
-          </p>
+      {/* Page header */}
+      <div className="flex flex-col gap-1 pb-2 border-b border-gray-100">
+        <div className="flex items-start justify-between flex-wrap gap-3">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight text-gray-900">Dashboard TPG</h1>
+            <p className="text-sm text-muted-foreground">
+              {puskesmasNama} · {bulan}
+            </p>
+          </div>
+          <Link
+            href="/export"
+            className="flex items-center gap-1.5 rounded-lg border px-3 py-2 text-xs font-medium hover:bg-muted"
+          >
+            <Download className="h-3.5 w-3.5" />
+            Ekspor Data
+          </Link>
         </div>
-        <Link
-          href="/export"
-          className="flex items-center gap-1.5 rounded-lg border px-3 py-2 text-xs font-medium hover:bg-muted"
-        >
-          <Download className="h-3.5 w-3.5" />
-          Ekspor Data
-        </Link>
       </div>
 
       {!puskesmasId && !posyanduId && (
@@ -136,9 +139,9 @@ export default async function DashboardTpgPage() {
 
       {/* SKDN Trend Chart */}
       {trend.length > 0 && (
-        <Card>
+        <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
           <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">Tren SKDN 6 Bulan</CardTitle>
+            <CardTitle className="text-base font-semibold text-gray-900">Tren SKDN 6 Bulan</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
             <SKDNTrendChart data={trend} />
@@ -148,9 +151,9 @@ export default async function DashboardTpgPage() {
 
       {/* Prevalence Chart */}
       {prevalenceChartData.length > 0 && (
-        <Card>
+        <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
           <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">Prevalensi Gizi per Posyandu</CardTitle>
+            <CardTitle className="text-base font-semibold text-gray-900">Prevalensi Gizi per Posyandu</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
             <PrevalenceBarChart data={prevalenceChartData} />
@@ -160,9 +163,9 @@ export default async function DashboardTpgPage() {
 
       {/* Posyandu Comparison Table */}
       {puskesmasId && (
-        <Card>
+        <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base font-semibold">Perbandingan Posyandu</CardTitle>
+            <CardTitle className="text-base font-semibold text-gray-900">Perbandingan Posyandu</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
             <PosyanduTable puskesmasId={puskesmasId} bulan={bulan} />
@@ -171,9 +174,9 @@ export default async function DashboardTpgPage() {
       )}
 
       {/* Alert List */}
-      <Card>
+      <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
         <CardHeader className="pb-3">
-          <CardTitle className="text-base font-semibold">
+          <CardTitle className="text-base font-semibold text-gray-900">
             Anak Berisiko ({allAlerts.length})
           </CardTitle>
         </CardHeader>

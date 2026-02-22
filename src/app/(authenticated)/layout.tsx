@@ -30,7 +30,7 @@ export default async function AuthenticatedLayout({
 
   return (
     <UserProvider user={user} profile={profile}>
-      <div className="flex h-screen overflow-hidden bg-gray-50">
+      <div className="flex h-screen overflow-hidden bg-surface-base">
         {/* Desktop sidebar */}
         <Sidebar />
 

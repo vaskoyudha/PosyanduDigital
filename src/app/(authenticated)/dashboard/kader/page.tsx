@@ -84,10 +84,12 @@ export default async function DashboardKaderPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Dashboard Kader</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
+      {/* Page header */}
+      <div className="flex flex-col gap-1 pb-2 border-b border-gray-100">
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900">
+          Dashboard Kader
+        </h1>
+        <p className="text-sm text-muted-foreground">
           {posyanduNama} · {bulan}
         </p>
       </div>
@@ -131,7 +133,7 @@ export default async function DashboardKaderPage() {
           </div>
 
           {/* SKDN Summary */}
-          <Card>
+          <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
                 Ringkasan SKDN — {bulan}
@@ -155,7 +157,7 @@ export default async function DashboardKaderPage() {
           </Card>
 
           {/* Belum Ditimbang */}
-          <Card>
+          <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base font-semibold">
@@ -176,7 +178,7 @@ export default async function DashboardKaderPage() {
       )}
 
       {/* Recent Uploads */}
-      <Card>
+      <Card className="shadow-sm border-0 ring-1 ring-gray-100/80">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <CardTitle className="text-base font-semibold">Upload Terakhir</CardTitle>

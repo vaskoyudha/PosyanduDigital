@@ -1,6 +1,5 @@
 import { cn } from '@/lib/utils'
-import { Baby, SearchX, AlertCircle } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Baby, FileText, SearchX, AlertCircle, Inbox } from 'lucide-react'
 
 export type EmptyStateVariant = 'children' | 'measurements' | 'search' | 'error' | 'generic'
 
@@ -15,29 +14,47 @@ export interface EmptyStateProps {
   className?: string
 }
 
-const DEFAULTS: Record<EmptyStateVariant, { icon: React.ReactNode; title: string; description: string }> = {
+type VariantConfig = {
+  icon: React.ElementType
+  color: string
+  bg: string
+  title: string
+  description: string
+}
+
+const VARIANT_CONFIG: Record<EmptyStateVariant, VariantConfig> = {
   children: {
-    icon: <Baby className="h-12 w-12 text-muted-foreground/40" />,
+    icon: Baby,
+    color: 'text-brand-400',
+    bg: 'bg-brand-50',
     title: 'Belum ada data anak',
     description: 'Mulai tambahkan data anak untuk posyandu ini.',
   },
   measurements: {
-    icon: <Baby className="h-12 w-12 text-muted-foreground/40" />,
+    icon: FileText,
+    color: 'text-slate-400',
+    bg: 'bg-slate-50',
     title: 'Belum ada data pengukuran',
     description: 'Tambahkan pengukuran pertama untuk anak ini.',
   },
   search: {
-    icon: <SearchX className="h-12 w-12 text-muted-foreground/40" />,
+    icon: SearchX,
+    color: 'text-gray-400',
+    bg: 'bg-gray-50',
     title: 'Tidak ada hasil',
     description: 'Tidak ada data yang cocok dengan pencarian Anda.',
   },
   error: {
-    icon: <AlertCircle className="h-12 w-12 text-destructive/40" />,
+    icon: AlertCircle,
+    color: 'text-rose-400',
+    bg: 'bg-rose-50',
     title: 'Terjadi kesalahan',
     description: 'Gagal memuat data. Silakan coba lagi.',
   },
   generic: {
-    icon: <Baby className="h-12 w-12 text-muted-foreground/40" />,
+    icon: Inbox,
+    color: 'text-gray-400',
+    bg: 'bg-gray-50',
     title: 'Tidak ada data',
     description: 'Belum ada data yang tersedia.',
   },
@@ -53,25 +70,27 @@ export function EmptyState({
   action,
   className,
 }: EmptyStateProps) {
-  const defaults = DEFAULTS[variant]
+  const config = VARIANT_CONFIG[variant]
+  const Icon = config.icon
 
   return (
     <div className={cn('flex flex-col items-center justify-center py-16 px-4 text-center', className)}>
-      {defaults.icon}
-      <h3 className="mt-4 text-base font-semibold text-foreground">
-        {title ?? defaults.title}
+      <div className={cn('flex h-16 w-16 items-center justify-center rounded-2xl mb-4', config.bg)}>
+        <Icon className={cn('h-8 w-8', config.color)} strokeWidth={1.5} />
+      </div>
+      <h3 className="text-base font-semibold text-gray-900 mt-1">
+        {title ?? config.title}
       </h3>
-      <p className="mt-1 text-sm text-muted-foreground max-w-sm">
-        {description ?? defaults.description}
+      <p className="text-sm text-muted-foreground mt-1 max-w-xs" style={{ textWrap: 'balance' } as React.CSSProperties}>
+        {description ?? config.description}
       </p>
       {action && (
-        <Button
+        <button
           onClick={action.onClick}
-          className="mt-6"
-          size="sm"
+          className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors"
         >
           {action.label}
-        </Button>
+        </button>
       )}
     </div>
   )
